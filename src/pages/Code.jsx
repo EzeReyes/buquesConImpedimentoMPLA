@@ -28,7 +28,7 @@ const Code = () => {
             <p className="text-lg text-center mt-4">
                 Es importante que los buques con Código 17 tomen medidas correctivas para abordar las deficiencias identificadas y cumplir con los requisitos de seguridad antes de zarpar. Esto puede implicar reparaciones, mantenimiento adicional, capacitación de la tripulación o cualquier otra acción necesaria para garantizar la seguridad y el cumplimiento de las regulaciones marítimas.
             </p>
-            <Link to="/vessels-code-17" className="btn btn-primary mt-6">Ver buques con Código 17</Link>
+            <Link to="/vessels-code-17" className="btn btn-primary bg-green-500 mt-6">Ver buques con Código 17</Link>
         </div>
         </>
     );
