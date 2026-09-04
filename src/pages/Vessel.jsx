@@ -1,11 +1,13 @@
 import { useQuery, useMutation } from "@apollo/client/react";
 import { GET_VESSELS } from "../graphql/queries/vessels";
+import { GET_INSPECTION, GET_INSPECTIONS } from "../graphql/queries/inspections";
 import { DELETE_VESSEL } from "../graphql/mutations/vessels";
 import Code from "./Code";
 import { Link } from "react-router-dom";
 const Vessels = () => {
 
     const { loading, error, data } = useQuery(GET_VESSELS);
+    const { loadingInsp, errorInsp, dataInsp } = useQuery(GET_INSPECTIONS);
 
     const [deleteVessel] = useMutation(DELETE_VESSEL, {
         onCompleted: () => {
@@ -22,11 +24,13 @@ const Vessels = () => {
 
 
 
-    if(loading) return <p>Cargando...</p>;
+    if(loading || loadingInsp) return <p>Cargando...</p>;
 
-    if(error) return <p>Error: {error.message}</p>;
+    if(error || errorInsp) return <p>Error: {error.message}</p>;
 
-    console.log(data)
+    console.log(data?.getVessels)
+
+    console.log(data?.getInspections)
 
     return(
 
@@ -42,8 +46,10 @@ const Vessels = () => {
 
                                 <p>{vessel.tuition}</p>
 
-                            <Link to={`/edit/${vessel.id}`} className="btn btn-secondary">Editar</Link>
-                            <button className="btn btn-danger" onClick={() => handleDelete(vessel?.id)}>Eliminar</button>
+                                <p className="bg-orange-500 text-white p-2">{vessel.code}</p>
+
+                            <Link to={`/edit/${vessel.id}`} className="bg-gray-600 text-white hover:bg-black rounded p-1 mb-1">Editar</Link>
+                            <button className="btn bg-red-500 text-white p-1 rounded" onClick={() => handleDelete(vessel?.id)}>Eliminar</button>
                         </div>
 
                 ))
@@ -56,7 +62,7 @@ const Vessels = () => {
 
             <Code />
 
-            <Link to="/new-inspection" className="btn btn-primary">Crear nueva inspección</Link>
+            <Link to="/new-inspection" className="bg-blue-500 text-white rounded hover:bg-blue-600">Crear nueva inspección</Link>
 
         </div>
 

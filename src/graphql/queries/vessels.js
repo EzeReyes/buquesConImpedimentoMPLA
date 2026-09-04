@@ -6,6 +6,9 @@ const GET_VESSELS = gql`
             id
             name
             tuition
+            inspections {
+                id
+            }
         }
     }
 `
@@ -15,7 +18,10 @@ const GET_VESSEL = gql`
         getVessel(id: $id) {
             id
             name
-            tuition
+            inspections
+            {
+                id
+            }
         }
     }
 `
