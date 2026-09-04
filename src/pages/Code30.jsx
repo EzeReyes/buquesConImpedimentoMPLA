@@ -26,7 +26,7 @@ const Code30 = () => {
                         )}
                         <p>IF : {inspection.inform}</p>
                         <p>Fecha: {inspection.date}</p>
-                        <p class={inspection.code === "CODIGO_30" && "bg-orange-700 rounded text-white"}>Código: {inspection.code}</p>
+                        <p class={inspection.code === "CODIGO_30" && "bg-red-700 rounded text-white"}>Código: {inspection.code}</p>
                         <p>Motivo: {inspection.reason}</p>
                         <p>Tipo de Inspección: {inspection.type}</p>
                         <p>Estado: {inspection.status}</p>
