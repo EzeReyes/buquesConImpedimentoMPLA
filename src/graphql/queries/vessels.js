@@ -8,6 +8,7 @@ const GET_VESSELS = gql`
             tuition
             inspections {
                 id
+                code
             }
         }
     }
@@ -18,6 +19,7 @@ const GET_VESSEL = gql`
         getVessel(id: $id) {
             id
             name
+            tuition
             inspections
             {
                 id

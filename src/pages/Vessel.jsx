@@ -1,13 +1,11 @@
 import { useQuery, useMutation } from "@apollo/client/react";
 import { GET_VESSELS } from "../graphql/queries/vessels";
-import { GET_INSPECTION, GET_INSPECTIONS } from "../graphql/queries/inspections";
 import { DELETE_VESSEL } from "../graphql/mutations/vessels";
 import Code from "./Code";
 import { Link } from "react-router-dom";
 const Vessels = () => {
 
     const { loading, error, data } = useQuery(GET_VESSELS);
-    const { loadingInsp, errorInsp, dataInsp } = useQuery(GET_INSPECTIONS);
 
     const [deleteVessel] = useMutation(DELETE_VESSEL, {
         onCompleted: () => {
@@ -24,9 +22,9 @@ const Vessels = () => {
 
 
 
-    if(loading || loadingInsp) return <p>Cargando...</p>;
+    if(loading) return <p>Cargando...</p>;
 
-    if(error || errorInsp) return <p>Error: {error.message}</p>;
+    if(error) return <p>Error: {error.message}</p>;
 
     console.log(data?.getVessels)
 
@@ -46,7 +44,9 @@ const Vessels = () => {
 
                                 <p>{vessel.tuition}</p>
 
-                                <p className="bg-orange-500 text-white p-2">{vessel.code}</p>
+                                <p className={`font-bold ${vessel?.inspections?.[0]?.code === "CODIGO_30" && "text-red-500"}`}>
+                                    {vessel?.inspections?.[0]?.code}
+                                </p>
 
                             <Link to={`/edit/${vessel.id}`} className="bg-gray-600 text-white hover:bg-black rounded p-1 mb-1">Editar</Link>
                             <button className="btn bg-red-500 text-white p-1 rounded" onClick={() => handleDelete(vessel?.id)}>Eliminar</button>
