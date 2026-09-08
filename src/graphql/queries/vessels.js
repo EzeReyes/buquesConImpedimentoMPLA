@@ -15,17 +15,25 @@ const GET_VESSELS = gql`
 `
 
 const GET_VESSEL = gql`
-    query GetVessel($id: ID!) {
-        getVessel(id: $id) {
+    query GetVessel($getVesselId: ID!) {
+    getVessel(id: $getVesselId) {
+        id
+        name
+        tuition
+        inspections {
             id
-            name
-            tuition
-            inspections
-            {
+            code
+            date
+            status
+            type
+            inform
+            reason
+            previousInspection {
                 id
             }
         }
     }
+}
 `
 
 export { GET_VESSELS, GET_VESSEL }

@@ -1,11 +1,14 @@
 import { useQuery, useMutation } from "@apollo/client/react";
 import { GET_INSPECTION } from "../graphql/queries/inspections";
 import { EDIT_INSPECTION } from "../graphql/mutations/inspections";
+import { useParams } from "react-router-dom";
 
 
-const EditInspection = ({ inspectionId }) => {
+const EditInspection = () => {
+        const { id } = useParams();
+    
     const { loading, error, data } = useQuery(GET_INSPECTION, {
-        variables: { id: inspectionId },
+        variables: { id: id },
     });
 
     const [editInspection] = useMutation(EDIT_INSPECTION, {
@@ -22,7 +25,7 @@ const EditInspection = ({ inspectionId }) => {
     const handleEdit = (updatedInspection) => {
         editInspection({
             variables: {
-                editInspectionId: inspectionId,
+                editInspectionId: id,
                 input: updatedInspection,
             },
         });
@@ -34,13 +37,13 @@ const EditInspection = ({ inspectionId }) => {
             <form>
                 <label>
                     Date:
-                    <input type="date" name="date" defaultValue={data.getInspection.date} />
+                    <input type="text" name="date" defaultValue={data.getInspection.date} />
                 </label>
                 <label>
                     Type:
                     <select name="type" defaultValue={data.getInspection.type}>
-                        <option value="INICIAL">Initial</option>
-                        <option value="MAS_DETALLADA">Detailed</option>
+                        <option value="INICIAL">Inicial</option>
+                        <option value="MAS_DETALLADA">Más Det</option>
                         <option value="DE_SEGUIMIENTO">Follow Up</option>
                     </select>
                 </label>
