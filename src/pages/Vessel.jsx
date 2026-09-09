@@ -14,7 +14,7 @@ const Vessels = () => {
 
         <div class="flex flex-col items-center justify-center my-10 gap-4">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-40">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:mx-40">
             {
                 
                 data?.getVessels.map(vessel=>(

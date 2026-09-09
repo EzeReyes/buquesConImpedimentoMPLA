@@ -1,18 +1,10 @@
-import { useQuery, useMutation } from "@apollo/client/react";
+import { useQuery } from "@apollo/client/react";
 import { GET_INSPECTIONS } from "../graphql/queries/inspections";
-import { DELETE_INSPECTION } from "../graphql/mutations/inspections";
-import { Link } from "react-router-dom";
 
 
 
 const Code17 = () => {
     const { loading, error, data } = useQuery(GET_INSPECTIONS);
-    const [deleteInspection] = useMutation(DELETE_INSPECTION, {
-        onCompleted: () => {
-            console.log("Inspection deleted successfully");
-            // Optionally, you can refetch the inspections query to update the list
-        }
-    });
 
     if(loading) return <p>Cargando...</p>;
 
@@ -20,36 +12,100 @@ const Code17 = () => {
 
     const CODIGO_17= data?.getInspections?.filter(inspection => inspection.code === "CODIGO_17");
 
-    const handleDelete = (id) => {
-        deleteInspection({ variables: {
-            deleteInspectionId: id }
-        });
-    }
-
     return (
-        <div>
-            <h1 class="text-2xl font-bold text-center my-4">Buques con Código 17</h1>
-            <ul>
+        <div className="w-full max-w-5xl mx-auto px-3 sm:px-6">
+
+            <h1 className="text-2xl sm:text-3xl font-bold text-center my-5">
+                Buques con Código 17
+            </h1>
+
+            <ul className="flex flex-col gap-4">
+
                 {CODIGO_17?.map(inspection => (
-                    <li class="flex flex-col items-center justify-center p-2 rounded border-black border" key={inspection.id}>
-                        <p>{inspection.vessel.name} ({inspection.vessel.tuition})</p>
+
+                    <li
+                        key={inspection.id}
+                        className="w-full rounded-lg border border-black bg-white p-4 shadow-sm"
+                    >
+
+                        <div className="border-b border-gray-300 pb-3 mb-3">
+                            <p className="text-lg font-bold">
+                                {inspection.vessel.name}
+                            </p>
+
+                            <p className="text-sm text-gray-600">
+                                Matrícula: {inspection.vessel.tuition}
+                            </p>
+                        </div>
+
+
                         {inspection.previousInspection && (
-                            <>
-                                <p>Previous Inspection Code: {inspection.previousInspection?.code}</p>
-                                <p>Previous Inspection Date: {inspection.previousInspection?.date}</p>
-                            </>
+                            <div className="bg-gray-100 rounded-md p-3 mb-3">
+
+                                <p className="font-semibold mb-1">
+                                    Inspección anterior
+                                </p>
+
+                                <p className="text-sm">
+                                    Código: {inspection.previousInspection.code}
+                                </p>
+
+                                <p className="text-sm">
+                                    Fecha: {inspection.previousInspection.date}
+                                </p>
+
+                            </div>
                         )}
-                        <p>IF : {inspection.inform}</p>
-                        <p>Fecha: {inspection.date}</p>
-                        <p class={inspection.code === "CODIGO_17" && "bg-orange-700 rounded text-white"}>Código: {inspection.code}</p>
-                        <p>Motivo: {inspection.reason}</p>
-                        <p>Tipo de Inspección: {inspection.type}</p>
-                        <p>Estado: {inspection.status}</p>
-                        <Link to={`/edit-inspection/${inspection.id}`} className="btn btn-secondary mt-2">Editar Inspección</Link>
-                        <button className="btn btn-danger mt-2" onClick={() => handleDelete(inspection?.id)}>Eliminar Inspección</button>
+
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+
+                            <p>
+                                <strong>IF:</strong>{" "}
+                                {inspection.inform}
+                            </p>
+
+                            <p>
+                                <strong>Fecha:</strong>{" "}
+                                {inspection.date}
+                            </p>
+
+                            <p>
+                                <strong>Motivo:</strong>{" "}
+                                {inspection.reason}
+                            </p>
+
+                            <p>
+                                <strong>Tipo:</strong>{" "}
+                                {inspection.type}
+                            </p>
+
+                            <p>
+                                <strong>Estado:</strong>{" "}
+                                {inspection.status}
+                            </p>
+
+                            <p>
+                                <strong>Código:</strong>{" "}
+                                <span
+                                    className={
+                                        inspection.code === "CODIGO_17"
+                                            ? "inline-block bg-red-700 text-white rounded px-2 py-1 font-bold"
+                                            : ""
+                                    }
+                                >
+                                    {inspection.code}
+                                </span>
+                            </p>
+
+                        </div>
+
                     </li>
+
                 ))}
+
             </ul>
+
         </div>
     );
 }
