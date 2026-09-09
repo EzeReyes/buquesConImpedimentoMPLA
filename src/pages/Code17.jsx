@@ -28,7 +28,7 @@ const Code17 = () => {
 
     return (
         <div>
-            <h1>Inspecciones</h1>
+            <h1 class="text-2xl font-bold text-center my-4">Buques con Código 17</h1>
             <ul>
                 {CODIGO_17?.map(inspection => (
                     <li class="flex flex-col items-center justify-center p-2 rounded border-black border" key={inspection.id}>

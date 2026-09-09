@@ -13,7 +13,7 @@ const Code30 = () => {
     const CODIGO_30= data?.getInspections?.filter(inspection => inspection.code === "CODIGO_30");
     return (
         <div>
-            <h1>Inspecciones</h1>
+            <h1 class="text-2xl font-bold text-center my-4">Buques con Código 30</h1>
             <ul>
                 {CODIGO_30?.map(inspection => (
                     <li class="flex flex-col items-center justify-center p-2 rounded border-black border" key={inspection.id}>
