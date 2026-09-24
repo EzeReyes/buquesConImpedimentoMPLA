@@ -7,7 +7,9 @@ function App() {
   const location = useLocation();
 
   return (
-    <>
+    <>  
+      {location.pathname !== "/login" && (
+        <>
         <header className='flex flex-row items-center justify- gap-2'>
           <div className='flex flex-row items-center justify-center p-2 gap-2'>
             <img src="./logo-insp.jpeg" alt="Logo de la Prefectura Naval Argentina" className='rounded-full w-20 h-20' />
@@ -23,11 +25,13 @@ function App() {
           <Link to="/vessels-code-17" className='bg-green-100 hover:bg-green-200 rounded p-1 border border-black'>Buques con Código 17</Link>
           <Link to="/vessels-code-30" className='bg-amber-100 hover:bg-amber-200 rounded p-1 border border-black'>Buques con Código 30</Link>
         </nav>
+        </>
+      )}
         {location.pathname === "/" && (
           <div className='flex flex-row items-center justify-center m-6 sm:mx-50 sm:my-6'>
             <p className='text-justify text-xl font-semibold'>Bienvenido aquí encontrará información de Buques con impedimento de salida o pendientes previos al zarpe, las medidas fueron impuestas mediante inspecciones extraordinarias por el cuerpo local de inspectores, acorde Regimen de Inspecciones Técnicas reglamentadas por la PNA</p>
-          </div> )
-          }  
+          </div> 
+        )  }  
         <Router />
     </>
   )

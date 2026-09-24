@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from "@apollo/client/react";
 import { GET_VESSELS } from "../graphql/queries/vessels";
 import { DELETE_VESSEL } from "../graphql/mutations/vessels";
-import Code from "./Code";
+import Code from "../components/Code";
 import { Link } from "react-router-dom";
 const Vessels = () => {
 
