@@ -11,7 +11,7 @@ const Login = () => {
 
     if (error) return <p>Error: {error.message}</p>;
 
-    if (data && data?.login) {
+    if (data?.login) {
         setTimeout(() => {
             navigate("/panel");
         }, 3000);

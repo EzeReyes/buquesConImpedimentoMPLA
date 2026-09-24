@@ -8,13 +8,13 @@ const NEW_VESSEL = gql`
     }
 `
 const EDIT_VESSEL = gql`
-    mutation EditVessel($input: InputVessel!, $id: ID!) {
-    editVessel(input: $input, id: $id) {
-        id
-        name
-        tuition
-        }
-    }
+mutation EditVessel($editVesselId: ID!, $input: InputVessel!) {
+  editVessel(id: $editVesselId, input: $input) {
+    id
+    name
+    tuition
+  }
+}
 `
 
 const DELETE_VESSEL = gql`

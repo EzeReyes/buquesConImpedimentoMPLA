@@ -9,8 +9,10 @@ const EditVessel = () => {
     const navigate = useNavigate();
     
     const { loading, error, data } = useQuery(GET_VESSEL, {
-        variables: { id }
+        variables: { getVesselId: id }
     });
+
+    console.log(id)
 
     const [editVessel] = useMutation(EDIT_VESSEL, {
         onCompleted: () => {
